@@ -16,6 +16,15 @@ commander.version(pkg.version)
   .option('-w --write', '在本地文件夹保存配置文件')
   .usage('[cmd] app')
 
+function displayUsage() {
+  console.log('使用：mc [options] <command>')
+  console.log('')
+  console.log('mc -h, --help  所有的命令和参数')
+  console.log('mc examples    显示mc使用例子')
+  console.log('mc <command> -h  命令帮助')
+  console.log('')
+  console.log('所有的pm2生成的文件都存在 ~/.mc')
+}
 if (process.argv.length === 2) {
   commander.parse(process.argv);
   commander.outputHelp()
