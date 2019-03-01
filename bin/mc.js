@@ -3,8 +3,9 @@
 const commander = require('commander')
 const pkg = require('../package.json')
 
-const SUCCESS_EXIT = 0;
-const ERROR_EXIT = 1;
+// 常量引入开始
+const cts = require('../constants')
+// 常量引入结束
 
 commander.version(pkg.version)
   .option('-v --verbose', '显示所有数据')
@@ -29,11 +30,13 @@ function displayUsage() {
 // 捕获所有的错误
 commander.command('*')
   .action(() => {
-    console.log()
+    console.log(cts.PREFIX_MSG + 'Command not found\n')
+    displayUsage()
+    process.exit(cts.ERROR_EXIT)
   })
 
 if (process.argv.length === 2) {
   commander.parse(process.argv);
-  commander.outputHelp()
-  process.exit(ERROR_EXIT)
+  displayUsage()
+  process.exit(cts.ERROR_EXIT)
 }
