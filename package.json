@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "like pm2",
   "main": "index.js",
+  "bin": {
+    "mc": "./bin/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
