@@ -27,16 +27,39 @@ function displayUsage() {
   console.log('所有的pm2生成的文件都存在 ~/.mc')
 }
 
+const CLI = {}
+CLI.startFromJson = (script) => {
+  console.log(script)
+}
+CLI.startFile = (script) => {
+  console.log(script)
+}
+
+//
+// Start command
+//
+commander.command('start <script>')
+  .description('开始启动具体的脚本')
+  .action((cmd) => {
+    if (cmd.indexOf('.json') > 0)
+      CLI.startFromJson(cmd);
+    else
+      CLI.startFile(cmd);
+  });
+
+//
 // 捕获所有的错误
+//
 commander.command('*')
   .action(() => {
     console.log(cts.PREFIX_MSG + 'Command not found\n')
-    displayUsage()
+    commander.outputHelp();
     process.exit(cts.ERROR_EXIT)
   })
 
 if (process.argv.length === 2) {
-  commander.parse(process.argv);
   displayUsage()
   process.exit(cts.ERROR_EXIT)
 }
+
+commander.parse(process.argv)
