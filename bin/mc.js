@@ -25,6 +25,13 @@ function displayUsage() {
   console.log('')
   console.log('所有的pm2生成的文件都存在 ~/.mc')
 }
+
+// 捕获所有的错误
+commander.command('*')
+  .action(() => {
+    console.log()
+  })
+
 if (process.argv.length === 2) {
   commander.parse(process.argv);
   commander.outputHelp()
